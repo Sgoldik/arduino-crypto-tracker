@@ -53,6 +53,7 @@ Connection diagram for ESP8266 firmware:
 |VCC|5v  |
 |SDA|A4  |
 |SCL|A5 |
+
 Update Arduino Uno firmware:
 
 1. Open the **/main/main.ino** file
