@@ -6,7 +6,8 @@
 const char* ssid = "TP-Link_408";
 const char* password = "84570550";
 
-#define API "https://api.coindesk.com/v1/bpi/currentprice.json"
+#define API_URL "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1,2,3"
+#define API_KEY ""
 
 void setup() {
   Serial.begin(115200);
@@ -14,12 +15,10 @@ void setup() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
   WiFi.begin(ssid, password);
-
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-
   Serial.println("WiFi connected");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
@@ -40,23 +39,29 @@ void getData() {
  
     HTTPClient http;
  
-    http.begin(*client, API);
+    http.begin(*client, API_URL);
+    http.addHeader("X-CMC_PRO_API_KEY", API_KEY); 
     int httpCode = http.GET();
  
     if (httpCode > 0) {
  
       String payload = http.getString();
+
       String json_str = String(payload);
-      DynamicJsonDocument doc(1024);
+      DynamicJsonDocument doc(4096);
       DeserializationError error = deserializeJson(doc, payload);
       
-      JsonObject bpi = doc["bpi"];
-      JsonObject usd = bpi["USD"];
-      String rate_float = usd["rate_float"];
+      JsonObject data = doc["data"];
+      JsonObject crypto = data["1"];
+      String ticker = crypto["name"];
+
+      // get price
+      JsonObject quote = crypto["quote"];
+      JsonObject usd = quote["USD"];
+      String price = usd["price"];
     
-      Serial.print(rate_float); 
+      Serial.print(price);
     }
- 
     http.end();
   }
 }
