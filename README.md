@@ -1,6 +1,9 @@
 
 # arduino-crypto-tracker
-It works only with the price of bitcoin (coindesk API), in the future it is planned to transfer to the coinmarketcap API.
+Version 0.3 supports 12 coins (bitcoin, ethereum, litecoin, waves, binance coin, monero, stellar, cake, bsw, eos, dogecoin, zcash), can be increased to 100 or even more.
+A request to the coinmarketcap API occurs every 5 minutes. Coins change every 25 seconds (5 minutes / number of coins).
+
+Now there is a separate server between the coinmarketcap and the wifi module, which simply removes unnecessary data from the coinmarketcap response. This is necessary because the wifi module can process a JSON object of no more than 4096 kilobytes.
 
 ## Components
 * Arduino Uno

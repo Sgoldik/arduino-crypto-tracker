@@ -8,8 +8,8 @@ const char* password = "84570550";
 
 const int timeout = 300000; // timeout between next API query
 
-const String API_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest";
-const String CRYPTO = "?slug=bitcoin,ethereum,litecoin";
+const String API_URL = "https://cmc-reducer.herokuapp.com/crypto";
+const String CRYPTO = "?slug=bitcoin,ethereum,litecoin,waves,binance-coin,monero,stellar,pancakeswap,biswap,eos,dogecoin,zcash";
 #define API_KEY "2831fae4-a23b-4b17-85ee-cce0a4520df2"
 
 void setup() {
@@ -20,7 +20,7 @@ void setup() {
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-//    Serial.print(".");
+    Serial.print(".");
   }
   Serial.print("WiFi ok.");
 }
@@ -48,22 +48,24 @@ void getData() {
       String payload = http.getString();
 
       String json_str = String(payload);
+
       DynamicJsonDocument doc(4096);
       DeserializationError error = deserializeJson(doc, payload);
-      
-      JsonObject data = doc["data"];
+      if (error) {
+        Serial.print(F("json failed:,"));
+        Serial.print(error.c_str());
+        return;
+      }
+      JsonArray data = doc["data"];
+      int arraySize = data.size();
 
-      for (JsonPair key : data) {
-        JsonObject crypto = data[key.key().c_str()];
-        String ticker = crypto["name"];
-  
-        // get price
-        JsonObject quote = crypto["quote"];
-        JsonObject usd = quote["USD"];
-        String price = usd["price"];
+      for (int i = 0; i < arraySize; i++) {
+        JsonObject crypto = data[i];
+        String name = crypto["name"];
+        String price = crypto["price"];
       
-        Serial.print(ticker + ",$" + price);
-        delay(timeout / data.size());
+        Serial.print(name + ",$" + price);
+        delay(timeout / arraySize);
       }
     }
     http.end();
