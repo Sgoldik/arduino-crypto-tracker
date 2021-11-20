@@ -20,11 +20,9 @@ void setup() {
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+//    Serial.print(".");
   }
-  Serial.println("WiFi connected");
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.print("WiFi ok.");
 }
 
 void loop() {
@@ -70,5 +68,4 @@ void getData() {
     }
     http.end();
   }
-  delay(timeout);
 }

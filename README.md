@@ -23,7 +23,7 @@ Connection diagram for ESP8266 firmware:
 |ENABLE|3.3v  |
 |TX|TX  |
 |RX|RX  |
-|RESET|GND  |
+|GPIO0|GND  |
 
 > It is also necessary to close reset and gnd on the arduino.
 
@@ -42,7 +42,7 @@ Connection diagram for ESP8266 firmware:
 |ESP8266|ARDUINO UNO  |
 |--|--|
 |GND  |GND  |
-|VIN|3.3v  |
+|3V3|3.3v  |
 |ENABLE|3.3v  |
 |TX|Serial 3  |
 |RX|Serial 2  |
