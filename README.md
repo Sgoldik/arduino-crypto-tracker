@@ -44,7 +44,7 @@ To update the ESP8266 firmware, you need to perform a number of manipulations wi
 6. Profit!
 
 ## Final connection diagram
-![final](https://i.imgur.com/UQTOLVl.png)
+![final](https://i.imgur.com/WkuA8OZ.png)
 
 Connection diagram for ESP8266 firmware:
 |ESP8266|ARDUINO UNO  |
