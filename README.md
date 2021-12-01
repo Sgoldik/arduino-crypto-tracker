@@ -4,6 +4,7 @@ Version 0.3 supports 12 coins (bitcoin, ethereum, litecoin, waves, binance coin,
 A request to the coinmarketcap API occurs every 5 minutes. Coins change every 25 seconds (5 minutes / number of coins).
 
 Now there is a separate server between the coinmarketcap and the wifi module, which simply removes unnecessary data from the coinmarketcap response. This is necessary because the wifi module can process a JSON object of no more than 4096 kilobytes.
+
 ![gif](https://i.imgur.com/MEcRNAY.gif)
 ## Components
 * Arduino Uno
@@ -18,6 +19,8 @@ Now there is a separate server between the coinmarketcap and the wifi module, wh
 * LiquidCrystal_I2C
 
 ## ESP8266 Firmware
+![ESP8266 Firmware](https://i.imgur.com/UQTOLVl.png)
+
 Connection diagram for ESP8266 firmware:
 |ESP8266|ARDUINO UNO  |
 |--|--|
@@ -41,6 +44,8 @@ To update the ESP8266 firmware, you need to perform a number of manipulations wi
 6. Profit!
 
 ## Final connection diagram
+![final](https://i.imgur.com/UQTOLVl.png)
+
 Connection diagram for ESP8266 firmware:
 |ESP8266|ARDUINO UNO  |
 |--|--|
